@@ -1,16 +1,31 @@
 import React, { FC } from 'react';
 
-export const TodoList:FC = () => {
-    
-    return(
-        <ul className="todo">
-            <li>
-                <label>
-                    <input type="checkbox"/>
-                    <span></span>
-                    <i className="material-icons red-text">delete</i>
-                </label>
-            </li>
+import { ITodo} from '../interfaces';
+
+type TodoListProps = {
+    todos: ITodo[]
+}
+
+export const TodoList: FC<TodoListProps> = ({ todos }) => {
+    return (
+        <ul>
+
+            {todos.map(todo => {
+                const classes = ['todo']
+                if(todo.completed){
+                    classes.push('completed');
+                }
+                return (
+                    <li key={todo.id} className={classes.join(' ')}>
+                        <label>
+                            <input type="checkbox" checked={todo.completed}/>
+                            <span>{todo.title}</span>
+                            <i className="material-icons red-text">delete</i>
+                        </label>
+                    </li>
+                )
+            })}
+
         </ul>
     )
 }

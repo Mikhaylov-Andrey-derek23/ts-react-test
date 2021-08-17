@@ -2,13 +2,24 @@ import React, {FC, useState} from 'react';
 
 import { Navbar, Todoform, TodoList } from './components';
 
+import { ITodo} from './interfaces';
+
 import './App.css';
 
-const App: React.FC = () => {
-  const [todos, setTodos ] = useState([]);
+const App:FC = () => {
+  const [todos, setTodos ] = useState<ITodo[]>([]);
 
   const addHandler = (title:string) => {
-    console.log('add new Todo', title)
+    const newTodo : ITodo = {
+      title : title,
+      id : Date.now(),
+      completed : false
+    }
+    setTodos((todo)=>{
+      return(
+        [newTodo, ...todo]
+      )
+    })
   }
 
   return (
@@ -18,7 +29,7 @@ const App: React.FC = () => {
         <Todoform 
           onAdd = {addHandler}
         />
-        <TodoList/>
+        <TodoList todos={todos}/>
       </div>
     </>
   )
