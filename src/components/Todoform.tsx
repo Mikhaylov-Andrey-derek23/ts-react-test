@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 
 interface TodoFormTodoProps  {
-    onAdd(title:string):void
+    onAdd(title:string):void 
 }
 
 export const Todoform: FC<TodoFormTodoProps> = (props) => {
