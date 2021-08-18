@@ -23,6 +23,7 @@ const App: FC = () => {
   }
 
   const chekHandler = (id: number) => {
+    console.log(2)
     setTodos(prev => 
       prev.map(t => {
         if (t.id === id) {
@@ -37,7 +38,8 @@ const App: FC = () => {
   }
 
   const removeHandler = (id: number) => {
-    console.log(id)
+    console.log(1)
+    setTodos(prev=> prev.filter(t => t.id !== id))
   }
 
   return (

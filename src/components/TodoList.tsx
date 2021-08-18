@@ -10,8 +10,9 @@ type TodoListProps = {
 
 export const TodoList: FC<TodoListProps> = ({ todos, onChek, onRemove  }) => {
     return (
+        <>
+        {todos.length === 0 ? <p className="center">Дел пока нет</p>: null}
         <ul>
-
             {todos.map(todo => {
                 const classes = ['todo']
                 if(todo.completed){
@@ -29,5 +30,6 @@ export const TodoList: FC<TodoListProps> = ({ todos, onChek, onRemove  }) => {
             })}
 
         </ul>
+        </>
     )
 }
