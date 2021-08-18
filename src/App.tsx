@@ -26,14 +26,14 @@ const App: FC = () => {
     setTodos(prev => 
       prev.map(t => {
         if (t.id === id) {
-          const last = t.completed
-          t.completed = !last
-          console.log(t)
+          return {
+            ...t,
+            completed : !t.completed 
+          }
         }
         return t
       })
     )
-
   }
 
   const removeHandler = (id: number) => {
