@@ -1,61 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
-import { Navbar, Todoform, TodoList } from './components';
+import {Switch, BrowserRouter, Route} from 'react-router-dom';
 
-import { ITodo } from './interfaces';
+import { Navbar } from './components';
+
+import Todo from './pages/Todo';
+import About from './pages/About';
+
 
 import './App.css';
 
+
 const App: FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  const addHandler = (title: string) => {
-    const newTodo: ITodo = {
-      title: title,
-      id: Date.now(),
-      completed: false
-    }
-    setTodos((todo) => {
-      return (
-        [newTodo, ...todo]
-      )
-    })
-  }
-
-  const chekHandler = (id: number) => {
-    console.log(2)
-    setTodos(prev => 
-      prev.map(t => {
-        if (t.id === id) {
-          return {
-            ...t,
-            completed : !t.completed 
-          }
-        }
-        return t
-      })
-    )
-  }
-
-  const removeHandler = (id: number) => {
-    console.log(1)
-    setTodos(prev=> prev.filter(t => t.id !== id))
-  }
-
+  
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      <div className="container">
-        <Todoform
-          onAdd={addHandler}
-        />
-        <TodoList
-          todos={todos}
-          onChek={chekHandler}
-          onRemove={removeHandler}
-        />
-      </div>
-    </>
+      <Switch>
+        <Route component={Todo} path="/" exact/>
+        <Route component={About} path="/about"/>          
+      </Switch>
+    </BrowserRouter>
   )
 }
 
